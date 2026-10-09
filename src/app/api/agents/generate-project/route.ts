@@ -4,14 +4,21 @@ import { createAdminClient } from '@/utils/supabase/admin';
 
 export async function GET(request: Request) {
   try {
-    // 1. Verify Authorization (Cron Secret)
+    // 1. Verify Authorization (if CRON_SECRET is configured)
     const { searchParams } = new URL(request.url);
     const secret = searchParams.get('secret');
-    if (secret !== process.env.CRON_SECRET && request.headers.get('Authorization') !== `Bearer ${process.env.CRON_SECRET}`) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    if (process.env.CRON_SECRET) {
+      if (secret !== process.env.CRON_SECRET && request.headers.get('Authorization') !== `Bearer ${process.env.CRON_SECRET}`) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      }
     }
 
-    // 2. Initialize Gemini
+    // 2. Validate environment variables
+    if (!process.env.GEMINI_API_KEY) {
+      return NextResponse.json({ error: 'GEMINI_API_KEY is not configured' }, { status: 500 });
+    }
+
+    // 3. Initialize Gemini
     const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
     // Generate a random seed to guarantee completely unique outputs every single time

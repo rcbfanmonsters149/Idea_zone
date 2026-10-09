@@ -45,7 +45,6 @@ An AI-driven platform for discovering, generating, tracking, and executing curat
    NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
    SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
    GEMINI_API_KEY=your_gemini_api_key
-   CRON_SECRET=your_cron_secret
    ```
 
 4. Run the development server:
@@ -54,3 +53,14 @@ An AI-driven platform for discovering, generating, tracking, and executing curat
    ```
 
 5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Deploy on Vercel
+
+1. Push your changes to GitHub repository.
+2. In [Vercel Dashboard](https://vercel.com/new), click **Add New...** > **Project** and import this repository.
+3. In the **Environment Variables** section, add:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `SUPABASE_SERVICE_ROLE_KEY`
+   - `GEMINI_API_KEY`
+4. Click **Deploy**. Vercel will build and deploy the Next.js application without any cron configuration issues.
