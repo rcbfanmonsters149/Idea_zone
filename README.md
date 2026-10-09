@@ -29,8 +29,8 @@ An AI-driven platform for discovering, generating, tracking, and executing curat
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/rcbfanmonsters149/Vibe_Designs.git
-   cd Vibe_Designs
+   git clone https://github.com/rcbfanmonsters149/Idea_zone.git
+   cd Idea_zone
    ```
 
 2. Install dependencies:
